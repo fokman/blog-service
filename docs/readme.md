@@ -28,3 +28,22 @@ d+i+e 删除整个文件内容
 删除打断内容 d+i+t delete inner tail
 修改内容 c+i+t 
 
+### main 
+> 定义了一个主方法，声明一个router，服务端口和读写时间
+```go
+func main() {
+	router := routers.NewRouter()
+
+	s := &http.Server{
+		Addr:           ":8080",
+		Handler:        router,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	err := s.ListenAndServe()
+	if err != nil {
+		return 
+	}
+}
+```
